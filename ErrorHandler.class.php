@@ -107,18 +107,14 @@ class ErrorHandler {
 	 * @param	void
 	 */
 	static function Shutdown() {
-		$fileName = "unknown file";
-		$errMsg   = "shutdown";
-		$errno    = E_CORE_ERROR;
-		$lineNum  = 0;
 		$error = error_get_last();
 		if ($error !== NULL) {
 			$errNo    = $error["type"];
 			$fileName = $error["file"];
 			$lineNum  = $error["line"];
 			$errMsg   = $error["message"];
+			ErrorHandler::Log($errNo, $errMsg, $fileName, $lineNum, array());
 		}
-		ErrorHandler::Log($errNo, $errMsg, $fileName, $lineNum, array());
 	}
 	
 	/** Log error to file
